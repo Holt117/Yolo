@@ -1,7 +1,8 @@
 import tcod as libtcod
 
+
 def render_all(con, entities, game_map, screen_width, screen_height, colors):
-    #Draw all the tiles in the game map
+    # Draw all the tiles in the game map
     for y in range(game_map.height):
         for x in range(game_map.width):
             wall = game_map.tiles[x][y].block_sight
