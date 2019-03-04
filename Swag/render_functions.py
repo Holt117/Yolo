@@ -12,12 +12,14 @@ def render_all(con, entities, game_map, screen_width, screen_height, colors):
 
             else:
                 libtcod.console_set_char_background(con, x, y, colors.get('dark_ground'), libtcod.BKGND_SET)
+
     # Draw all entities in the list
     for entity in entities:
         draw_entity(con, entity)
 
-    libtcod.console_blit(con, 0, 0, screen_width, screen_height, 0, 0, 0)
-    # Still doesn't like the Zero
+    libtcod.console_blit(con, 0, 0, screen_width, screen_height, 0, 0, 0)  # Still doesn't like the Zero
+
+
 def clear_all(con, entities):
     for entity in entities:
         clear_entity(con, entity)
