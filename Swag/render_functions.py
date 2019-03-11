@@ -18,6 +18,8 @@ def render_all(con, entities, game_map, screen_width, screen_height, colors):
 
     libtcod.console_blit(con, 0, 0, screen_width, screen_height, 0, 0, 0)
     # Still doesn't like the Zero
+
+
 def clear_all(con, entities):
     for entity in entities:
         clear_entity(con, entity)
