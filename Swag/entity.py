@@ -1,4 +1,5 @@
 import tcod as libtcod
+
 import math
 
 from render_functions import RenderOrder
@@ -21,6 +22,7 @@ class Entity:
 
         if self.fighter:
             self.fighter.owner = self
+
         if self.ai:
             self.ai.owner = self
 
@@ -35,11 +37,16 @@ class Entity:
         distance = math.sqrt(dx ** 2 + dy ** 2)
 
         dx = int(round(dx / distance))
-        dy  = int(round(dy / distance))
+        dy = int(round(dy / distance))
 
         if not (game_map.is_blocked(self.x + dx, self.y + dy) or
                 get_blocking_entities_at_location(entities, self.x + dx, self.y + dy)):
             self.move(dx, dy)
+
+    def distance_to(self, other):
+        dx = other.x - self.x
+        dy = other.y - self.y
+        return math.sqrt(dx ** 2 + dy ** 2)
 
     def move_astar(self, target, entities, game_map):
         # Create a FOV map that has the dimensions of the map
@@ -57,6 +64,7 @@ class Entity:
             if entity.blocks and entity != self and entity != target:
                 # Set the tile as a wall so it must be navigated around
                 libtcod.map_set_properties(fov, entity.x, entity.y, True, False)
+
         # Allocate a A* path
         # The 1.41 is the normal diagonal cost of moving, it can be set as 0.0 if diagonal moves are prohibited
         my_path = libtcod.path_new_using_map(fov, 1.41)
@@ -81,11 +89,6 @@ class Entity:
 
             # Delete the path to free memory
         libtcod.path_delete(my_path)
-
-    def distance_to(self, other):
-        dx = other.x - self.x
-        dy = other.y - self.y
-        return math.sqrt(dx ** 2 + dy **2)
 
 
 def get_blocking_entities_at_location(entities, destination_x, destination_y):

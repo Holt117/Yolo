@@ -17,6 +17,7 @@ class Fighter:
 
     def attack(self, target):
         results = []
+
         damage = self.power - target.fighter.defense
 
         if damage > 0:
@@ -26,4 +27,5 @@ class Fighter:
         else:
             results.append({'message': '{0} attacks {1} but does no damage.'.format(
                 self.owner.name.capitalize(), target.name)})
+
         return results

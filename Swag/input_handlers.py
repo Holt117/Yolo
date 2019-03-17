@@ -3,7 +3,7 @@ import tcod as libtcod
 
 def handle_keys(key):
     key_char = chr(key.c)
-    # Movement keys
+
     if key.vk == libtcod.KEY_UP or key_char == 'k':
         return {'move': (0, -1)}
     elif key.vk == libtcod.KEY_DOWN or key_char == 'j':

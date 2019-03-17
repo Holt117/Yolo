@@ -31,6 +31,7 @@ def render_all(con, entities, player, game_map, fov_map, fov_recompute, screen_w
                         libtcod.console_set_char_background(con, x, y, colors.get('dark_ground'), libtcod.BKGND_SET)
 
     entities_in_render_order = sorted(entities, key=lambda x: x.render_order.value)
+
     # Draw all entities in the list
     for entity in entities_in_render_order:
         draw_entity(con, entity, fov_map)
@@ -41,8 +42,6 @@ def render_all(con, entities, player, game_map, fov_map, fov_recompute, screen_w
 
     libtcod.console_blit(con, 0, 0, screen_width, screen_height, 0, 0, 0)
     # Still doesn't like the Zero
-
-    libtcod.console_blit(con, 0, 0, screen_width, screen_height, 0, 0, 0)  # Still doesn't like the Zero
 
 
 def clear_all(con, entities):

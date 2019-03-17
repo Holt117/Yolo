@@ -63,9 +63,10 @@ def main():
             recompute_fov(fov_map, player.x, player.y, fov_radius, fov_light_walls, fov_algorithm)
 
         render_all(con, entities, player, game_map, fov_map, fov_recompute, screen_width, screen_height, colors)
-        libtcod.console_flush()
 
         fov_recompute = False
+
+        libtcod.console_flush()
 
         clear_all(con, entities)
 
@@ -128,6 +129,7 @@ def main():
 
                         if message:
                             print(message)
+
                         if dead_entity:
                             if dead_entity == player:
                                 message, game_state = kill_player(dead_entity)
@@ -135,9 +137,11 @@ def main():
                                 message = kill_monster(dead_entity)
 
                             print(message)
+
                             if game_state == GameStates.PLAYER_DEAD:
                                 break
-                        if game_state == GameStates.PLAYER_DEAD:
+
+                    if game_state == GameStates.PLAYER_DEAD:
                             break
             else:
                 game_state = GameStates.PLAYERS_TURN
