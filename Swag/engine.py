@@ -1,5 +1,7 @@
 import tcod as libtcod
 
+
+from components.inventory import Inventory
 from game_messages import MessageLog
 from components.fighter import Fighter
 from death_functions import kill_monster, kill_player
@@ -35,6 +37,7 @@ def main():
     fov_radius = 10
 
     max_monsters_per_room = 3
+    max_items_per_room = 2
 
     colors = {
         'dark_wall': libtcod.Color(0, 0, 100),
@@ -43,8 +46,9 @@ def main():
         'light_ground': libtcod.Color(200, 180, 50)
     }
     fighter_component = Fighter(hp=30, defense=2, power=5)
+    inventory_component = Inventory(26)
     player = Entity(0, 0, '@', libtcod.white, 'Player', blocks=True, render_order=RenderOrder.ACTOR,
-                    fighter=fighter_component)
+                    fighter=fighter_component, inventory=inventory_component)
     entities = [player]
 
     libtcod.console_set_custom_font('arial10x10.png', libtcod.FONT_TYPE_GREYSCALE | libtcod.FONT_LAYOUT_TCOD)
@@ -56,7 +60,7 @@ def main():
 
     game_map = GameMap(map_width, map_height)
     game_map.make_map(max_rooms, room_min_size, room_max_size, map_width, map_height, player, entities,
-                      max_monsters_per_room)
+                      max_monsters_per_room, max_items_per_room)
 
     fov_recompute = True
 
@@ -87,6 +91,7 @@ def main():
         action = handle_keys(key)
 
         move = action.get('move')
+        pickup = action.get('pickup')
         exit = action.get('exit')
         fullscreen = action.get('fullscreen')
 
