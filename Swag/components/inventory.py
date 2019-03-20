@@ -4,15 +4,15 @@ from game_messages import Message
 
 
 class Inventory:
-    def __init__(selfs, capacity):
+    def __init__(self, capacity):
         self.capacity = capacity
-        self.item = []
+        self.items = []
 
     def add_item(self, item):
         results = []
 
         if len(self.items) >= self.capacity:
-            results.appent({
+            results.append({
                 'item_added': None,
                 'message': Message('You cannot carry any more, you inventory is full', libtcod.yellow)
             })
