@@ -12,6 +12,7 @@ class RenderOrder(Enum):
     ITEM = 2
     ACTOR = 3
 
+
 def get_names_under_mouse(mouse, entities, fov_map):
     (x, y) = (mouse.cx, mouse.cy)
 
