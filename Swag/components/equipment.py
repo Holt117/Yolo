@@ -67,4 +67,5 @@ class Equipment:
 
                 self.off_hand = equippable_entity
                 results.append({'equipped': equippable_entity})
+
         return results

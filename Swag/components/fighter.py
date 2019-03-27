@@ -7,18 +7,18 @@ class Fighter:
     def __init__(self, hp, defense, power, xp=0):
         self.base_max_hp = hp
         self.hp = hp
-        self.base_max_defense = defense
+        self.base_defense = defense
         self.base_power = power
         self.xp = xp
 
     @property
     def max_hp(self):
         if self.owner and self.owner.equipment:
-            bonus = self.owner.equipment.power_bonus
+            bonus = self.owner.equipment.max_hp_bonus
         else:
             bonus = 0
 
-        return self.base_power + bonus
+        return self.base_max_hp + bonus
 
     @property
     def power(self):

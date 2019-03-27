@@ -32,7 +32,7 @@ def menu(con, header, options, width, screen_width, screen_height):
 
 def inventory_menu(con, header, player, inventory_width, screen_width, screen_height):
     # show a menu with each item of the inventory as an option
-    if len(player.items) == 0:
+    if len(player.inventory.items) == 0:
         options = ['Inventory is empty.']
     else:
         options = []
@@ -62,14 +62,15 @@ def main_menu(con, background_image, screen_width, screen_height):
 
 def level_up_menu(con, header, player, menu_width, screen_width, screen_height):
     options = ['Constitution (+20 HP, from {0})'.format(player.fighter.max_hp),
-               'Strength (+1 attack, from {0})'.format(player.figther.power),
-               'Agility(+1 defense, from {0})'.format(player.figther.defense)]
+               'Strength (+1 attack, from {0})'.format(player.fighter.power),
+               'Agility(+1 defense, from {0})'.format(player.fighter.defense)]
 
     menu(con, header, options, menu_width, screen_width, screen_height)
 
 
 def message_box(con, header, width, screen_width, screen_height):
     menu(con, header, [], width, screen_width, screen_height)
+
 
 def character_screen(player, character_screen_width, character_screen_height, screen_width, screen_height):
     window = libtcod.console_new(character_screen_width, character_screen_height)

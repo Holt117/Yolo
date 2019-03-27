@@ -16,6 +16,7 @@ from components.equipment import Equipment
 from components.equippable import Equippable
 from equipment_slots import EquipmentSlots
 
+
 def get_constants():
     window_title = 'Roguelike Tutorial Revised'
 
