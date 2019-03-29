@@ -89,7 +89,9 @@ class GameMap:
                 rooms.append(new_room)
                 num_rooms += 1
         stairs_component = Stairs(self.dungeon_level + 1)
-        down_stairs = Entity(center_of_last_room_x, center_of_last_room_y, '>', libtcod.white, 'Stairs', render_order=RenderOrder.STAIRS, stairs=stairs_component)
+        down_stairs = Entity(center_of_last_room_x, center_of_last_room_y, '>', libtcod.white, 'Stairs',
+                             render_order=RenderOrder.STAIRS, stairs=stairs_component)
+        entities.append(down_stairs)
 
     def create_room(self, room):
         # go through the tiles in the rectangle and make them passable
@@ -192,17 +194,16 @@ class GameMap:
 
         return False
 
+    def next_floor(self, player, message_log, constants):
+        self.dungeon_level += 1
+        entities = [player]
 
-def next_floor(self, player, message_log, constants):
-    self.dungeon_level += 1
-    entities = [player]
-
-    self.tiles = self.initialize_tiles()
-    self.make_map(constants['max_rooms'], constants['room_min_size'], constants['room_max_size'],
+        self.tiles = self.initialize_tiles()
+        self.make_map(constants['max_rooms'], constants['room_min_size'], constants['room_max_size'],
                   constants['map_width'], constants['map_height'], player, entities)
 
-    player.fighter.heal(player.figther.max_hp // 2)
+        player.fighter.heal(player.fighter.max_hp // 2)
 
-    message_log.add_message(Message('You take a moment to rest, and recover your strength.', libtcod.light_violet))
+        message_log.add_message(Message('You take a moment to rest, and recover your strength.', libtcod.light_violet))
 
-    return entities
+        return entities
